@@ -72,10 +72,10 @@ def make_success():
 
 @app.route("/api/signup", methods=["POST"])
 def api_signup():
-  username = request.form['username']
-  password = request.form['password']
-  email = request.form['email']
-  role = request.form['role']
+  username = request.json['username']
+  password = request.json['password']
+  email = request.json['email']
+  role = request.json['role']
   if not (role == 'stu' or role == 'emp'):
     return jsonify(**make_error("Role is not correct."))
   hashed_pass = hasher.hash_password(password)
@@ -88,11 +88,11 @@ def api_signup():
 
 @app.route("/api/login", methods=["POST"])
 def api_login():
-  user_result = User.query.filter_by(username=request.form['username'])
+  user_result = User.query.filter_by(username=request.json['username'])
   if user_result.count() == 0:
     return jsonify(**make_error("Entered username does not exist."))
   hashed_pass = user_result.first().password
-  if not hasher.check_password(request.form['password'], hashed_pass):
+  if not hasher.check_password(request.json['password'], hashed_pass):
     return jsonify(**make_error("Password does not match."))
   return jsonify(**make_success())
 
@@ -111,9 +111,9 @@ def api_translation_history():
 @app.route("/api/answer", methods=["POST"])
 def api_answer():
   # Pending
-  if request.form['type'] != 0 or request.form['type'] != 1:
+  if request.json['type'] != 0 or request.json['type'] != 1:
     return jsonify(**make_error{"idt" : "error", "error" : "Requested answer POST type is invalid." })
-  if request.form['type'] == 0:
+  if request.json['type'] == 0:
     pass
 """
 
