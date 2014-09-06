@@ -15,7 +15,27 @@ empApp.factory('empFactory', function($http, $q){
 });
 
 empApp.controller('empCtrl', function(empFactory, $scope){
+    $scope.vis = {
+        tableVis : false
+    };
+    $scope.table = []; // list of past problems
+    $scope.testTable = [
+        {
+            "problem" : 0,
+            "content" : ["a", "b", "c"]
+        },
+        {
+            "problem" : 1,
+            "content" : ["d", "e", "f"]
+        }
+    ];
     empFactory.getHist().then(function(data){
-        console.log(data);
-    })
+        if (data.idt==="error") {
+            alert("Failed to get data");
+        } else {
+            console.log("A");
+            $scope.table = data.data;
+            $scope.vis.tableVis = true;
+        }
+    });
 })

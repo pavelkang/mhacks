@@ -14,7 +14,7 @@ signupApp.factory("signFactory", function($http, $q){
             return deferred.promise;
         }
     }
-})
+});
 
 signupApp.controller('signupCtrl', function(signFactory, $location, $scope, $http){
     $scope.form = {

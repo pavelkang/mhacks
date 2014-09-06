@@ -1,6 +1,22 @@
 var loginApp = angular.module('loginApp', []);
 
-loginApp.controller('loginCtrl', function($scope, $http){
+loginApp.factory("loginFactory", function($http, $q){
+    return {
+        sendForm : function(form) {
+            var deferred = $q.defer();
+            $http.post('/api/login', form)
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+                .error(function(err) {
+                    deferred.reject("Code validation failed!");
+                });
+            return deferred.promise;
+        }
+    }
+});
+
+loginApp.controller('loginCtrl', function(loginFactory, $scope, $http){
     $scope.form = {
         username : "",
         password : "",
@@ -8,19 +24,18 @@ loginApp.controller('loginCtrl', function($scope, $http){
     };
     $scope.submit = function() {
         if (validate($scope.form)) {
-            $http.post('/api/login', $scope.form)
-                .success(function(data){
-                    if (data.idt==="data") {
-                        alert("Login successful!");
+            loginFactory.sendForm(form).then(function(data){
+                if (data.idt==="error") {
+                    alert(data.error);
+                } else {
+                    alert ("Login successful!");
                         if ($scope.form.role=="stu") { // is student
                             window.location.href = "/student#/?username="+$scope.form.username;
                         } else { // is employer
                             window.location.href = "/employer#/?username="+$scope.form.username;
                         }
-                    } else { // error
-                        alert(data.error);
-                    }
-                });
+                }
+            });
         }
     };
 });p
