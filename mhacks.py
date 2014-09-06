@@ -99,9 +99,16 @@ def api_login():
 @app.route("/api/hist", methods=["GET"])
 def api_translation_history():
   translation_history = Translation.query.all()
-  translations = []
+  problem_content_map = {}
   for entry in translation_history:
-    translations.append({ "id" : entry.id, "problem" : entry.problem, "content" : entry.content })
+    if not entry.problem in problem_content_map:
+      problem_content_map[entry.problem] = []
+    problem_content_map[entry.problem].append(entry.content)
+  translations = []
+  for key in problem_content_map:
+    translations.append({ 
+      "problem" : entry.problem, 
+      "content" : problem_content_map[key]})
   return jsonify(**{
     "idt" : "data",
     "data" : translations
