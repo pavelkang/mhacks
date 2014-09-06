@@ -8,6 +8,9 @@
   </head>
   <body ng-controller="loginCtrl">
     <p>Duolingo 2</p>
+    <form>
+      
+    </form>
     <a href="/login">Login</a>
     <a href="/signup#/?role=emp">Employer</a>
     <a href="/signup#/?role=stu">Student</a>

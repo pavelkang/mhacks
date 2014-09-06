@@ -1,14 +1,24 @@
 <!doctype html>
-<html>
+<html ng-app="stuApp">
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <script src="../static/js/angular/angular.min.js"></script>
+    <script src="../static/js/student.js"></script>
   </head>
-  <body>
+  <body ng-controller="stuCtrl">
     <p>Student</p>
     <p>Question: How are you doing?</p>
-    <form>
-      <input type="submit"/>
+    <form id="mcform">
+      <input type="radio" ng-model="form.choice" value=0/> 1 <br>
+      <input type="radio" ng-model="form.choice" value=1/> 2 <br>
+      <input type="radio" ng-model="form.choice" value=2/> 3 <br>
+      <input type="radio" ng-model="form.choice" value=3/> 4 <br>
+      <input type="submit" ng-click="submit()"/>
     </form>
+    <form id="inform">
+      <input type="text" ng-model="form.input" ng-click="submit"/>
+    </form>
+    {{test}}
   </body>
 </html>

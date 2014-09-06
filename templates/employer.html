@@ -1,12 +1,15 @@
 <!doctype html>
-<html>
+<html ng-app="empApp">
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <script src="../static/js/angular/angular.min.js"></script>
+    <script src="../static/js/employer.js"></script>
   </head>
-  <body>
+  <body ng-controller="empCtrl">
     <p>Page for employer</p>
     <p>Here should be a table</p>
     <button>Upload Audio</button>
+    {{test}}
   </body>
 </html>
