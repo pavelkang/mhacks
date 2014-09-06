@@ -1,12 +1,14 @@
 <!doctype html>
-<html>
+<html ng-app="signupApp">
   <head>
     <title>MHacks</title>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
+    <script src="../static/js/angular.min.js"></script>
   </head>
-  <body>
+  <body ng-controller="signupCtrl">
     <p>Sign Up</p>
     <form>
+      {{test}}
       <input placeholder="Your name:"/>
       <input placeholder="Your email:"/>
       <input placeholder="Your password:"/>
