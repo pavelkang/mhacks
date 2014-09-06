@@ -53,6 +53,7 @@ class Translation(db.Model):
 
 class TranslationVotes(db.Model):
   __tablename__ = 'translation_votes'
+
   id = db.Column(db.Integer, primary_key=True)
   choice_id = db.Column(db.Integer)
   problem = db.Column(db.Integer, db.ForeignKey("problems.id"))
@@ -94,7 +95,7 @@ def api_login():
     return jsonify(**make_error("Password does not match."))
   return jsonify(**make_success())
 
-@app.route("/api/translation_history", methods=["GET"])
+@app.route("/api/hist", methods=["GET"])
 def api_translation_history():
   translation_history = Translation.query.all()
   translations = []
@@ -104,6 +105,15 @@ def api_translation_history():
     "idt" : "data", 
     "data" : translations
   })
+
+@app.route("/api/answer", methods=["POST"])
+def api_answer():
+  # Pending
+  if request.form['type'] != 0 or request.form['type'] != 1:
+    return jsonify(**make_error{ "idt" : "error", "error" : "Requested answer POST type is invalid." })
+  if request.form['type'] == 0:
+    pass
+
 
 @app.route("/")
 def index():
