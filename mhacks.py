@@ -111,8 +111,8 @@ def api_translation_history():
     problem_content_map[entry.problem].append(entry.content)
   translations = []
   for key in problem_content_map:
-    translations.append({ 
-      "problem" : entry.problem, 
+    translations.append({
+      "problem" : entry.problem,
       "content" : problem_content_map[key]})
   return jsonify(**{
     "idt" : "data",
@@ -140,6 +140,8 @@ def api_audio():
     if file and allowed_file(file.filename):
       filename = secure_filename(file.filename)
       file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+      return jsonify(**make_success())
+  return jsonify(**make_error())
 
 @app.route("/")
 def index():
