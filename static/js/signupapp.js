@@ -27,11 +27,18 @@ signupApp.controller('signupCtrl', function(signFactory, $location, $scope, $htt
     $scope.submit = function(form) {
         $scope.form.role = $location.search().role;
         if (validate($scope.form)) {
-            console.log(form);
             signFactory.sendForm(form).then(function(data){
-                alert("Signup successful!");
-                console.log(data);
-            })
+                if (data.idt==="error") {
+                    alert(data.error);
+                } else {
+                    alert("Signup successful!");
+                    if ($scope.form.role==="stu") { // is student
+                        window.location.href = "/student#/?username="+$scope.form.username;
+                    } else { // is employer
+                        window.location.href = "/employer#/?username="+$scope.form.username;
+                    }
+                }
+            });
         }
     };
 });
