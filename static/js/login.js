@@ -8,20 +8,22 @@ loginApp.controller('loginCtrl', function($scope, $http){
     };
     $scope.submit = function() {
         if (validate($scope.form)) {
-            console.log($scope.form)
             $http.post('/api/login', $scope.form)
                 .success(function(data){
                     if (data.idt==="data") {
                         alert("Login successful!");
-                        // TODO redirect by query
-                        window.location.href = "/student";
+                        if ($scope.form.role=="stu") { // is student
+                            window.location.href = "/student#/?username="+$scope.form.username;
+                        } else { // is employer
+                            window.location.href = "/employer#/?username="+$scope.form.username;
+                        }
                     } else { // error
-                        alert("Login information incorrect!");
+                        alert(data.error);
                     }
                 });
         }
     };
-});
+});p
 
 var validate = function(form) {
     if ((!form.username)||(!form.password)) {
