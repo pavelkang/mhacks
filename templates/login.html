@@ -1,14 +1,18 @@
 <!doctype html>
-<html>
+<html ng-app="loginApp">
   <head>
     <title>MHacks</title>
+    <script src="../static/js/angular/angular.min.js"></script>
+    <script src="../static/js/login.js"></script>
     <meta charset="utf-8" />
   </head>
-  <body>
+  <body ng-controller="loginCtrl">
     <p>login</p>
+    {{test}}
     <form>
       <input placeholder="Name or Email:"/>
       <input placeholder="Password"/>
+      <input type="submit" ng-click="submit()"/>
     </form>
   </body>
 </html>

@@ -1,14 +1,17 @@
 <!doctype html>
-<html>
+<html ng-app="stuApp">
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <script src="../static/js/angular/angular.min.js"></script>
+    <script src="../static/js/student.js"></script>
   </head>
-  <body>
+  <body ng-controller="stuCtrl">
     <p>Student</p>
     <p>Question: How are you doing?</p>
     <form>
       <input type="submit"/>
     </form>
+    {{test}}
   </body>
 </html>
