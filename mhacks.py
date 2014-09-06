@@ -16,8 +16,6 @@ app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 UPLOAD_FOLDER = './static/audio/'
 ALLOWED_EXTENSIONS = set(['mp3', 'm4a', 'rmvb', 'mp4'])
-
-app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
