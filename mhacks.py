@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory, render_template, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
 import phpass
 import os
+import random
 from werkzeug import secure_filename
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -131,15 +132,27 @@ def api_answer():
 
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+      filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @app.route('/api/audio', methods=['POST'])
 def api_audio():
-  if request.method == 'POST':
-    file = request.files['file']
-    if file and allowed_file(file.filename):
-      filename = secure_filename(file.filename)
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+  file = request.files['file']
+  if file and allowed_file(file.filename):
+    cnt = Problem.query.count() + 1
+    ext = filename.rsplit('.', 1)[1]
+    filename = str(cnt) + '.' + ext
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+@app.route('/api/problem', methods=['GET'])
+def api_problem():
+  cnt = Problem.filter.count()
+  if cnt == 0:
+    return jsonify(**make_error("No problem has been created so far."))
+  else:
+    return jsonify({
+      "idt" : "data",
+      "data" : { "id" : random.randint(1, cnt) }
+      })
 
 @app.route("/")
 def index():
