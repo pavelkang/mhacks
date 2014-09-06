@@ -4,23 +4,27 @@
     <title>MHacks</title>
     <meta charset="utf-8" />
     <script src="../static/js/angular/angular.min.js"></script>
-    <script src="../static/js/ng-audio.min.js"></script>
     <script src="../static/js/student.js"></script>
-    <link rel="stylesheet" href="../static/css/ng-audio.min.css">
   </head>
   <body ng-controller="stuCtrl">
-    <p>Student</p>
-    <p>Question: How are you doing?</p>
-    <form id="mcform">
+    <label>Audio goes here:</label>
+    <audio controls>
+      <source src="{{mp3source}}" type="audio/mp3">
+      Your browser does not support the audio element.
+    </audio>
+    <form id="inform">
+      <label>Type your translation here:</label>
+      <input type="text" ng-model="form.input" ng-click="submit"/>
+    </form>
+    {{test}}
+  </body>
+</html>
+<!--
+    <form id="mcform" ng-show="false">
       <input type="radio" ng-model="form.choice" value=0/> 1 <br>
       <input type="radio" ng-model="form.choice" value=1/> 2 <br>
       <input type="radio" ng-model="form.choice" value=2/> 3 <br>
       <input type="radio" ng-model="form.choice" value=3/> 4 <br>
       <input type="submit" ng-click="submit()"/>
     </form>
-    <form id="inform">
-      <input type="text" ng-model="form.input" ng-click="submit"/>
-    </form>
-    {{test}}
-  </body>
-</html>
+-->
