@@ -12,7 +12,8 @@ loginApp.controller('loginCtrl', function($scope, $http){
         .success(function(data){
             if (data.idt==="data") {
                 alert("Login successful!");
-                // TODO: redirect to page
+                // TODO redirect by query
+                window.location.href = "/student";
             } else { // error
                 alert("Login information incorrect!");
             }
