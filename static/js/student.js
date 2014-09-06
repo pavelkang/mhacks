@@ -5,5 +5,4 @@ stuApp.controller('stuCtrl', function($scope){
         choice : 0,
         input : ""
     }
-    $scope.test = "stu";
 })
