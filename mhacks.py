@@ -76,7 +76,8 @@ def api_signup():
   password = request.form['password']
   email = request.form['email']
   role = request.form['role']
-  assert role == 'stu' or role == 'emp'
+  if not (role == 'stu' or role == 'emp'):
+    return jsonify(**make_error("Role is not correct."))
   hashed_pass = hasher.hash_password(password)
   if User.query.filter_by(username=username).count() > 0:
     return jsonify(**make_error("User with designated username already exists."))
@@ -105,6 +106,7 @@ def api_translation_history():
     "idt" : "data",
     "data" : translations
   })
+
 """
 @app.route("/api/answer", methods=["POST"])
 def api_answer():
