@@ -101,19 +101,19 @@ def api_translation_history():
   translations = []
   for entry in translation_history:
     translations.append({ "id" : entry.id, "problem" : entry.problem, "content" : entry.content })
-  return jsonify(**{ 
-    "idt" : "data", 
+  return jsonify(**{
+    "idt" : "data",
     "data" : translations
   })
-
+"""
 @app.route("/api/answer", methods=["POST"])
 def api_answer():
   # Pending
   if request.form['type'] != 0 or request.form['type'] != 1:
-    return jsonify(**make_error{ "idt" : "error", "error" : "Requested answer POST type is invalid." })
+    return jsonify(**make_error{"idt" : "error", "error" : "Requested answer POST type is invalid." })
   if request.form['type'] == 0:
     pass
-
+"""
 
 @app.route("/")
 def index():

@@ -10,8 +10,8 @@
     <p>login</p>
     {{test}}
     <form>
-      <input placeholder="Name or Email:"/>
-      <input placeholder="Password"/>
+      <input placeholder="Name or Email:" ng-model="form.username"/>
+      <input placeholder="Password" ng-model="form.password"/>
       <input type="submit" ng-click="submit()"/>
     </form>
   </body>
