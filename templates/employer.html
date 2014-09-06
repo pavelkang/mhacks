@@ -3,7 +3,9 @@
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <script src="../static/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
     <script src="../static/js/angular/angular.min.js"></script>
+    <script src="../static/js/angular-file-upload/angular-file-upload.min.js"></script>
     <script src="../static/js/employer.js"></script>
     <link rel="stylesheet" href="//assets.ziggeo.com/css/ziggeo-betajs-player.min.css" />
     <script src="//assets.ziggeo.com/js/ziggeo-jquery-json2-betajs-player.min.js"></script>
@@ -11,10 +13,21 @@
   </head>
   <body ng-controller="empCtrl">
     <p>Page for employer</p>
+    <div ng-controller="MyCtrl">
+      <input type="text" ng-model="myModelObj">
+      <input type="file" ng-file-select="onFileSelect($files)">
+      <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
+      <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
+      <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function"
+           ng-show="dropSupported">drop files here</div>
+      <div ng-file-drop-available="dropSupported=true"
+           ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
+      <button ng-click="upload.abort()">Cancel Upload</button>
+    </div>
     <div ng-show="vis.tableVis">
       <p>Here should be a table</p>
       <!-- TODO: Change testtable to real table -->
-      <table ng-repeat="entry in testTable">
+      <table ng-repeat="entry in testTable" border="1">
         <tr>
           <!-- TODO get the audio -->
           <td>{{entry.problem}}</td>
