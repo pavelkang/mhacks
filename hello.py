@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-  return render_template("index.html")
+  return send_from_directory("./templates", "index.html")
 
 @app.route("/signup")
 def signup():
@@ -11,15 +11,15 @@ def signup():
 
 @app.route("/employer")
 def employer():
-  return render_template("employer.html")
+  return send_from_directory("./templates", "employer.html")
 
 @app.route("/student")
 def student():
-  return render_template("student.html")
+  return send_from_directory("./templates", "student.html")
 
 @app.route("/login")
 def login():
-  return render_template("login.html")
+  return send_from_directory("./templates", "login.html")
 
 if __name__ == "__main__":
   app.run(debug=True)
