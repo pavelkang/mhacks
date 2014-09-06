@@ -145,7 +145,7 @@ def api_audio():
 
 @app.route('/api/problem', methods=['GET'])
 def api_problem():
-  cnt = Problem.filter.count()
+  cnt = Problem.query.count()
   if cnt == 0:
     return jsonify(**make_error("No problem has been created so far."))
   else:
