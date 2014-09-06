@@ -1,5 +1,5 @@
 var signupApp = angular.module('signupApp', []);
 
-signupApp.controller('signappCtrl', function($scope){
+signupApp.controller('signupCtrl', function($scope){
     $scope.test = "Hello";
 });

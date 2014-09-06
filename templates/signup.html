@@ -1,18 +1,18 @@
 <!doctype html>
-<html ng-app="signupApp">
+<html ng-app>
   <head>
     <title>MHacks</title>
     <meta charset="utf-8"/>
-    <script src="../static/js/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.0/angular.min.js"></script>
   </head>
-  <body ng-controller="signupCtrl">
+  <body>
     <p>Sign Up</p>
     <form>
-      {{test}}
-      <input placeholder="Your name:"/>
+      <input placeholder="Your name:" ng-model="name"/>
       <input placeholder="Your email:"/>
       <input placeholder="Your password:"/>
       <!-- TODO: password double check -->
     </form>
+    {{name}}
   </body>
 </html>
