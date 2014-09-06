@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory, render_template, jsonify, request
 from flask.ext.sqlalchemy import SQLAlchemy
 import phpass
 import os
+from werkzeug import secure_filename
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 db_path = os.path.join(basedir, 'db.sqlite')
@@ -12,6 +13,12 @@ hasher = phpass.PasswordHash(8, False)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = schema_path
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
+
+UPLOAD_FOLDER = './static/audio/'
+ALLOWED_EXTENSIONS = set(['mp3', 'm4a', 'rmvb', 'mp4'])
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
 
@@ -123,6 +130,18 @@ def api_answer():
   if request.json['type'] == 0:
     pass
 """
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@app.route('/api/audio', methods=['POST'])
+def api_audio():
+  if request.method == 'POST':
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+      filename = secure_filename(file.filename)
+      file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
 @app.route("/")
 def index():
