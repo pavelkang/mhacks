@@ -144,12 +144,14 @@ def api_audio():
   file = request.files['file']
   if file and allowed_file(file.filename):
     nprob = Problem()
-    cnt = nprob.id
     db.session.add(nprob)
     db.session.commit()
+    cnt = Problem.query.order_by(Problem.id.desc()).limit(1).first().id
     ext = file.filename.rsplit('.', 1)[1]
     filename = str(cnt) + '.' + ext
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    return jsonify(**make_success())
+  return jsonify(**make_error("Upload failed."))
 
 @app.route('/api/problem', methods=['GET'])
 def api_problem():

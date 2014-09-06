@@ -17,8 +17,8 @@ stuApp.factory('stuFactory', function($http, $q){
 stuApp.controller('stuCtrl', function($scope, $http, stuFactory){
     $scope.data = {
         id : "",
-        source : "nothing"
-    }
+        src : "nothing"
+    };
     $scope.form = {
         choice : 0,
         input : "",
@@ -26,8 +26,10 @@ stuApp.controller('stuCtrl', function($scope, $http, stuFactory){
         ID : -1
     };
     stuFactory.getProblem().then(function(data){
-        $scope.data.id = data.id;
-        $scope.data.src = "../static/audio/" + data.id + ".mp3";
+        console.log(data);
+        $scope.data.id = data.data.id;
+        $scope.data.src = "../static/audio/" + data.data.id + ".mp3";
+        document.getElementById("problemaudio").src=$scope.data.src;
     });
     $scope.submit = function() {
         if (validate($scope.form)) {
