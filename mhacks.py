@@ -41,6 +41,11 @@ class User(db.Model):
 
 class Problem(db.Model):
   __tablename__ = 'problems'
+
+  def __init__(self, sourceLang='chn', destLang='eng'):
+    self.sourceLang = sourceLang
+    self.destLang = destLang
+
   id = db.Column(db.Integer, primary_key=True)
   sourceLang = db.Column(db.String(10))
   destLang = db.Column(db.String(10))
@@ -138,8 +143,11 @@ def allowed_file(filename):
 def api_audio():
   file = request.files['file']
   if file and allowed_file(file.filename):
-    cnt = Problem.query.count() + 1
-    ext = filename.rsplit('.', 1)[1]
+    nprob = Problem()
+    cnt = nprob.id
+    db.session.add(nprob)
+    db.session.commit()
+    ext = file.filename.rsplit('.', 1)[1]
     filename = str(cnt) + '.' + ext
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
