@@ -78,7 +78,7 @@ def api_signup():
   role = request.json['role']
   if not (role == 'stu' or role == 'emp'):
     return jsonify(**make_error("Role is not correct."))
-  hashed_pass = hasher.hash_password(password)
+  hashed_pass = password
   if User.query.filter_by(username=username).count() > 0:
     return jsonify(**make_error("User with designated username already exists."))
   new_user = User(username, hashed_pass, email, role)
@@ -92,7 +92,7 @@ def api_login():
   if user_result.count() == 0:
     return jsonify(**make_error("Entered username does not exist."))
   hashed_pass = user_result.first().password
-  if not hasher.check_password(request.json['password'], hashed_pass):
+  if not hashed_pass == request.json['password']:
     return jsonify(**make_error("Password does not match."))
   return jsonify(**make_success())
 
