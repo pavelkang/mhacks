@@ -105,6 +105,7 @@ def api_translation_history():
     "idt" : "data",
     "data" : translations
   })
+
 """
 @app.route("/api/answer", methods=["POST"])
 def api_answer():

@@ -8,10 +8,10 @@ signupApp.controller('signupCtrl', function($location, $scope, $http){
         check : "",
         role : ""
     };
-    $scope.submit = function() {
+    $scope.submit = function(form) {
         $scope.form.role = $location.search().role;
         if (validate($scope.form)) {
-        $http.post('/api/signup', $scope.form)
+        $http.post('/api/signup', form)
         .success(function(data){
             if (data.idt==="data") {
                 alert("Signup successful!");
@@ -30,8 +30,8 @@ signupApp.controller('signupCtrl', function($location, $scope, $http){
 
 var validate = function(form) {
     console.log(form);
-    valid = form.password === form.check;
-    if ((!form.username)||(!form.email)||(!form.password)||(!valid)) {
+    valid = (form.password === form.check);
+    if ((!form.username)||(!form.email)||(!form.password)||(!form.role)||(!valid)) {
         alert("Information not valid!");
         return false;
     }

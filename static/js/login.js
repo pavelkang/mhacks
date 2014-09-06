@@ -8,17 +8,17 @@ loginApp.controller('loginCtrl', function($scope, $http){
     };
     $scope.submit = function() {
         if (validate($scope.form)) {
-            console.log("Hi");
-        $http.post('/api/login', $scope.form)
-        .success(function(data){
-            if (data.idt==="data") {
-                alert("Login successful!");
-                // TODO redirect by query
-                window.location.href = "/student";
-            } else { // error
-                alert("Login information incorrect!");
-            }
-        });}
+            $http.post('/api/login', $scope.form)
+                .success(function(data){
+                    if (data.idt==="data") {
+                        alert("Login successful!");
+                        // TODO redirect by query
+                        window.location.href = "/student";
+                    } else { // error
+                        alert("Login information incorrect!");
+                    }
+                });
+        }
     };
 });
 
