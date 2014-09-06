@@ -8,8 +8,9 @@
   </head>
   <body ng-controller="stuCtrl">
     <label>Audio goes here:</label>
+    {{data.source}}
     <audio controls>
-      <source src="{{mp3source}}" type="audio/mp3">
+      <source src="{{data.source}}" type="audio/mp3">
       Your browser does not support the audio element.
     </audio>
     <form id="inform">

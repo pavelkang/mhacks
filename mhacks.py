@@ -112,8 +112,8 @@ def api_translation_history():
     problem_content_map[entry.problem].append(entry.content)
   translations = []
   for key in problem_content_map:
-    translations.append({ 
-      "problem" : entry.problem, 
+    translations.append({
+      "problem" : entry.problem,
       "content" : problem_content_map[key]})
   return jsonify(**{
     "idt" : "data",

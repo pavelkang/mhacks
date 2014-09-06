@@ -1,2 +1,7 @@
-Only a test.
-This is the project for MHacks 2014.
+> MHacks 2014
+* An audio&video upgrade of the original Duolingo
+* Team members:
+  - algorithm (C++): Jason
+  - backend (Flask): Ted Li
+  - frontend (AngularJS): Kai Kang
+  - designer: Lois Yang
