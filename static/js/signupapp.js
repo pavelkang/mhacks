@@ -2,21 +2,21 @@ var signupApp = angular.module('signupApp', []);
 
 signupApp.controller('signupCtrl', function($location, $scope, $http){
     $scope.form = {
-        name : "",
+        username : "",
         email : "",
         password : "",
         check : "",
-        id : ""
+        role : ""
     };
     $scope.submit = function() {
-        $scope.form.id = $location.search().role;
-        validate($scope.form)
+        $scope.form.role = $location.search().role;
+        if (validate($scope.form)) {
         $http.post('/api/signup', $scope.form)
         .success(function(data){
             if (data.idt==="data") {
                 alert("Signup successful!");
                 // Redirect
-                if ($scope.form.id==="stu") {
+                if ($scope.form.role==="stu") {
                     window.href = "/student";
                 } else {
                     window.href = "/employer";
@@ -24,13 +24,14 @@ signupApp.controller('signupCtrl', function($location, $scope, $http){
             } else { // error
                 alert("Signup information incorrect!");
             }
-        });
+        });}
     };
 });
 
 var validate = function(form) {
+    console.log(form);
     valid = form.password === form.check;
-    if ((!form.name)||(!form.email)||(!form.password)||(!valid)) {
+    if ((!form.username)||(!form.email)||(!form.password)||(!valid)) {
         alert("Information not valid!");
         return false;
     }

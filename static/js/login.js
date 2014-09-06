@@ -7,7 +7,7 @@ loginApp.controller('loginCtrl', function($scope, $http){
         valid : false
     };
     $scope.submit = function() {
-        console.log("Submit login info...");
+        if (validate($scope.form)) {
         $http.post('/api/login', $scope.form)
         .success(function(data){
             if (data.idt==="data") {
@@ -17,6 +17,14 @@ loginApp.controller('loginCtrl', function($scope, $http){
             } else { // error
                 alert("Login information incorrect!");
             }
-        });
+        });}
     };
 });
+
+var validate = function(form) {
+    if ((!form.name)||(!form.password)) {
+        alert("Login information not complete!");
+        return false;
+    }
+    return true;
+}
