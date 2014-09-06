@@ -11,16 +11,22 @@ stuApp.controller('stuCtrl', function($scope, $http){
         ID : -1
     };
     $scope.submit = function() {
+        console.log("Submitting...");
         if (validate($scope.form)) {
             // http request here
+            $http.post('/api/answer', $scope.form)
+            .success(function(data){
+                console.log("POSTING" + data);
+            });
         }
-    }
+    };
 });
 
 var validate = function(form) {
-    if (type==0) { // choice question
+    console.log("Form" + form);
+    if (form.type==0) { // choice question
     } else { // input question
-        if (input==="") {
+        if (form.input==="") {
             alert("Not valid!");
             return false;
         }
