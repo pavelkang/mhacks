@@ -21,7 +21,7 @@ loginApp.controller('loginCtrl', function($scope, $http){
                 });
         }
     };
-});
+});p
 
 var validate = function(form) {
     if ((!form.username)||(!form.password)) {

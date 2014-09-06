@@ -1,6 +1,22 @@
 var signupApp = angular.module('signupApp', []);
 
-signupApp.controller('signupCtrl', function($location, $scope, $http){
+signupApp.factory("signFactory", function($http, $q){
+    return {
+        sendForm : function(form) {
+            var deferred = $q.defer();
+            $http.post('/api/signup', form)
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+                .error(function(err) {
+                    deferred.reject("Code validation failed!");
+                });
+            return deferred.promise;
+        }
+    }
+})
+
+signupApp.controller('signupCtrl', function(signFactory, $location, $scope, $http){
     $scope.form = {
         username : "",
         email : "",
@@ -11,25 +27,16 @@ signupApp.controller('signupCtrl', function($location, $scope, $http){
     $scope.submit = function(form) {
         $scope.form.role = $location.search().role;
         if (validate($scope.form)) {
-        $http.post('/api/signup', form)
-        .success(function(data){
-            if (data.idt==="data") {
+            console.log(form);
+            signFactory.sendForm(form).then(function(data){
                 alert("Signup successful!");
-                // Redirect
-                if ($scope.form.role==="stu") {
-                    window.href = "/student";
-                } else {
-                    window.href = "/employer";
-                }
-            } else { // error
-                alert("Signup information incorrect!");
-            }
-        });}
+                console.log(data);
+            })
+        }
     };
 });
 
 var validate = function(form) {
-    console.log(form);
     valid = (form.password === form.check);
     if ((!form.username)||(!form.email)||(!form.password)||(!form.role)||(!valid)) {
         alert("Information not valid!");
