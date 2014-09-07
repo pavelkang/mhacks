@@ -3,6 +3,13 @@
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/flat-ui.css">
+    <link rel="stylesheet" href="../static/css/icon-font.css">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900,400,700,500,300' rel='stylesheet' type='text/css'>
     <script src="../static/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
     <script src="../static/js/angular/angular.min.js"></script>
     <script src="../static/js/angular-file-upload/angular-file-upload.min.js"></script>
@@ -10,40 +17,102 @@
     <link rel="stylesheet" href="//assets.ziggeo.com/css/ziggeo-betajs-player.min.css" />
     <script src="//assets.ziggeo.com/js/ziggeo-jquery-json2-betajs-player.min.js"></script>
     <script>ZiggeoApi.token = "c488183f3edddc77f9b460742b6500aa";</script>
+    <!-- responsive -->
+    <style>
+     body {
+       background-color : #eee;
+       padding-top : 20px;
+       padding-left : 20%;
+     }
+     .problem {
+       width : 35%;
+       height : 150px;
+     }
+     .content {
+       width : 55%;
+       height : 150px;
+       border-left : solid 1px white;
+     }
+     .tables {
+       border-radius : 20px;
+       border : none;
+       background-color : #16A085;
+       margin : 10px;
+     }
+     #clipboard {
+       display : inline-block;
+       width : 50px;
+       height : 50px;
+       padding-left : 20px;
+     }
+     .emp {
+       width : 50px;
+       position : absolute;
+       right : 20px;
+       top : 10px;
+     }
+     #emptext {
+       position : absolute;
+       right : 22px;
+       font-size : 10px;
+       top : 70px;
+       color : #2980B9;
+     }
+     .progress {
+       width : 85%;
+       height : 20px;
+       background-color : white;
+     }
+     .progress-bar {
+       background-color : #2ecc71;
+       height : 20px;
+       width : 0%;
+       border-radius : 10px;
+     }
+    </style>
   </head>
   <body ng-controller="empCtrl">
-    <p>Page for employer</p>
-    <div ng-controller="MyCtrl">
-      <input type="text" ng-model="myModelObj">
-      <input type="file" ng-file-select="onFileSelect($files)">
-      <input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*">
-      <div class="button" ng-file-select="onFileSelect($files)" data-multiple="true"></div>
-      <div ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="optional-css-class-name-or-function"
-           ng-show="dropSupported">drop files here</div>
-      <div ng-file-drop-available="dropSupported=true"
-           ng-show="!dropSupported">HTML5 Drop File is not supported!</div>
-      <button ng-click="upload.abort()">Cancel Upload</button>
+    <div>
+      <span id="title1">
+        <img src="../static/img/clipboard.svg" id="clipboard"/>
+        <h5 style="padding-left:10px;display:inline-block;color:#27ae60;">View history problems</h5>
+      </span>
     </div>
+    <img src="../static/icons/employers.png" class="emp"/>
+    <p id="emptext">Employer</p>
     <div ng-show="vis.tableVis">
-      <p>Here should be a table</p>
-      <!-- TODO: Change testtable to real table -->
-      <table ng-repeat="entry in testTable" border="1">
+      <table ng-repeat="entry in testTable" class="tables">
         <tr>
-          <!-- TODO get the audio -->
-          <td>{{entry.problem}}</td>
-          <td>
-            <div>
-              <!-- make this visual -->
-              1. {{entry.content[0]}} <br>
-              2. {{entry.content[1]}} <br>
-              3. {{entry.content[2]}}
+          <td class="problem">
+            <audio controls id="problemaudio">
+              <source src="{{'../static/audio/'+entry.problem+'.mp3'}}" type="audio/mp3">
+              Your browser does not support the audio element.
+            </audio>
+          </td>
+          <td class="content">
+            <div> <!-- TODO style -->
+              <p> 1. {{entry.content[0]}} </p>
+              <p> 2. {{entry.content[1]}} </p>
+              <p> 3. {{entry.content[2]}} </p>
             </div>
           </td>
         </tr>
       </table>
     </div>
-    <button>Upload Audio</button>
-    <!--<button>Record your video</button> -->
-    <ziggeo ziggeo-perms="allowupload"></ziggeo>
+    <div>
+      <span id="title1">
+        <img src="../static/img/retina.svg" id="clipboard"/>
+        <h5 style="padding-left:10px;display:inline-block;color:#27ae60;">Upload a new video</h5>
+      </span>
+    </div>
+    <div ng-controller="MyCtrl">
+      <div class="progress">
+        <div class="progress-bar" id="pb" ></div>
+      </div>
+      <br>
+      {{data.percent}} {{data.msg}}
+      <input type="file" ng-file-select="onFileSelect($files)">
+      <button ng-click="upload.abort()" >Cancel Upload</button>
+    </div>
   </body>
 </html>

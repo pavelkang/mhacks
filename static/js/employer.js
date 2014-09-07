@@ -15,6 +15,11 @@ empApp.factory('empFactory', function($http, $q){
 });
 
 empApp.controller('MyCtrl', function($scope, $upload){
+    $scope.data = {
+        percent : 0,
+        msg : ""
+    }
+
   $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     for (var i = 0; i < $files.length; i++) {
@@ -25,7 +30,12 @@ empApp.controller('MyCtrl', function($scope, $upload){
         file: file,
         //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
       }).progress(function(evt) {
-        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+          $scope.data.percent = parseInt(100.0 * evt.loaded / evt.total);
+          document.getElementById("pb").style.width = $scope.data.percent + "%";
+          if ($scope.data.percent===100.0) {
+              $scope.data.msg = "Finished!";
+          }
+          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
       }).success(function(data, status, headers, config) {
         console.log(data);
       });
