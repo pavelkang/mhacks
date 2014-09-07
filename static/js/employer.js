@@ -66,6 +66,7 @@ empApp.controller('empCtrl', function(empFactory, $scope){
             console.log("A");
             $scope.table = data.data;
             $scope.vis.tableVis = true;
+            console.log(data.data);
         }
     });
 })
