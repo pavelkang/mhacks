@@ -1578,10 +1578,25 @@ section * {
     }
 }
 #img1 {
-    -webkit-animation: blink 1s;
+    position : absolute;
+    -webkit-animation: blink 2s;
     -webkit-animation-iteration-count: infinite;
-    -moz-animation: blink 1s;
+    -moz-animation: blink 2s;
     -moz-animation-iteration-count: infinite;
-    -o-animation: blink 1s;
+    -o-animation: blink 2s;
     -o-animation-iteration-count: infinite;
+    -webkit-animation-delay : 1.0s;
+
+}
+#img2 {
+    position:absolute;
+    -webkit-animation: blink 2s;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation: blink 2s;
+    -moz-animation-iteration-count: infinite;
+    -o-animation: blink 2s;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-delay : 0.5s;
+}
+#img3 {
 }

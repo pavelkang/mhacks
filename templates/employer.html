@@ -87,10 +87,11 @@
       <table ng-repeat="entry in testTable" class="tables">
         <tr>
           <td class="problem">
-            <audio controls id="problemaudio">
+            <audio controls id="problemaudio" ng-show="{{isAudio(entry)}}">
               <source src="{{'../static/audio/'+entry.problem+'.mp3'}}" type="audio/mp3">
               Your browser does not support the audio element.
             </audio>
+            <ziggeo ng-show="{{isZiggeo(entry)}}"></ziggeo>
           </td>
           <td class="content">
             <div>
@@ -105,7 +106,7 @@
     <div>
       <span id="title1">
         <img src="../static/img/retina.svg" id="clipboard"/>
-        <h5 style="padding-left:10px;display:inline-block;color:#27ae60;">Upload a new video</h5>
+        <h5 style="padding-left:10px;display:inline-block;color:#27ae60;">Upload a new audio/video</h5>
       </span>
     </div>
     <div ng-controller="MyCtrl">
@@ -114,8 +115,10 @@
       </div>
       <br>
       {{data.percent}} {{data.msg}}
-      <input type="file" ng-file-select="onFileSelect($files)">
-      <button ng-click="upload.abort()" >Cancel Upload</button>
+      <input type="file" ng-file-select="onFileSelect($files)"> OR &nbsp
+      <!-- <button ng-click="upload.abort()" >Cancel Upload</button> -->
+      <button ng-click="openZiggeo()" class="btn btn-embossed btn-warning">Upload a video with Ziggeo</button>
+      <ziggeo id="z" style="display:none;"></ziggeo>
     </div>
   </body>
 </html>
