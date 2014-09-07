@@ -10,11 +10,21 @@ empApp.factory('empFactory', function($http, $q){
                 deferred.reject('An error occurred!')
             });
             return deferred.promise;
+        },
+        sendZiggeo : function(form) {
+            var deferred = $q.defer();
+            $http.post('/api/ziggeo', form)
+                .success(function(data) {
+                    deferred.resolve(data);
+                })
+                .error(function(err) {
+                    deferred.reject("Upload ziggeo failed");
+                });
+            return deferred.promise;
         }
     }
 });
-
-empApp.controller('MyCtrl', function($scope, $upload){
+empApp.controller('MyCtrl', function($scope, $upload, empFactory){
     $scope.data = {
         percent : 0,
         msg : "",
@@ -23,7 +33,16 @@ empApp.controller('MyCtrl', function($scope, $upload){
     $scope.openZiggeo = function() {
         document.getElementById("z").style.display = "block";
         $scope.data.zigOpen = true;
-    }
+    };
+    ZiggeoApi.Events.on("submitted", function (data) {
+        alert("Submitted a new video with token '" + data.video.token + "'!");
+        form = {
+            "token" : data.video.token
+        };
+        empFactory.sendZiggeo(form).then(function(data){
+            console.log(data);
+        })
+    });
 
     $scope.onFileSelect = function($files) {
         //$files: an array of files selected, each file has name, size, and type.
