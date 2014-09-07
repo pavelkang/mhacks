@@ -3,18 +3,42 @@
   <head>
     <title>MHacks</title>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../static/css/flat-ui.css">
+    <link rel="stylesheet" href="../static/css/icon-font.css">
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="../static/js/angular/angular.min.js"></script>
     <script src="../static/js/signupapp.js"></script>
+    <style type="text/css">
+        html {
+          height: 700px;
+        }
+        body {
+          overflow: hidden;
+        }
+        .form-group{
+          display:block;
+        }
+        .login-form{
+          width:500px;
+          height:700px;
+          background-image: url("../static/img/signuppage-01.png") ;
+          background-color: #fff;
+          padding: 65px 500px 100px;
+          position: relative;
+          border-radius: 6px;
+          }
+          .login-form:before{
+
+          }
+    </style>
   </head>
   <body ng-controller="signupCtrl">
-    <p>Sign Up</p>
-    <form>
-      <input placeholder="Your name:" ng-model="form.username"/>
-      <input placeholder="Your email:" ng-model="form.email"/>
-      <input placeholder="Your password:" ng-model="form.password"/>
-      <input placeholder="Password again please:" ng-model="form.check"/>
-      <input type="submit" ng-click="submit(form)"/>
-    </form>
+    <form class="login-form">
+      <input type="text" placeholder="Your name:" class="form-group form-control login-lg" ng-model="form.username"/>
+      <input type="text" placeholder="Your email:" class="form-group form-control login-lg" ng-model="form.email"/>
+      <input type="text" placeholder="Your password:" class="form-group form-control login-lg" ng-model="form.password"/>
+      <input type="text" placeholder="Password again please:" class="form-group form-control login-lg" ng-model="form.check"/>
+      <input class="btn btn-sm btn-block" style="background:#f39c12; color:#ffffff" type="submit" ng-click="submit(form)"/>
     {{form.valid}}
   </body>
 </html>
