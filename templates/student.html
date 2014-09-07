@@ -3,21 +3,108 @@
   <head>
     <title>MHacks</title>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/flat-ui.css">
+    <link rel="stylesheet" href="../static/css/icon-font.css">
+    <style>
+    .card {
+       padding:40px;
+       position: relative;
+       top:70px;
+       left:30%;
+       bottom:100px;
+       width: 35%;
+       border-radius : 20px;
+       border : none;
+       background-color : #16A085;
+       margin : 10px;
+    }
+    label {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #ffffff;
+        font-size: 16px;
+      }
+      .title1{
+        position:relative;
+        left:350px;
+        top:30px;
+      }
+      #clipboard {
+       display : inline-block;
+       width : 70px;
+       height : 70px;
+       padding-left : 20px;
+     }
+
+     .emp {
+       width : 50px;
+       position : absolute;
+       right : 20px;
+       top : 10px;
+     }
+     .navbar {
+      position: relative;
+      left:400px;
+      top:100px;
+     }
+     #emptext {
+       position : absolute;
+       right : 22px;
+       font-size : 10px;
+       top : 70px;
+       color : #2980B9;
+     }
+    }
+    </style>
     <script src="../static/js/angular/angular.min.js"></script>
     <script src="../static/js/student.js"></script>
   </head>
   <body ng-controller="stuCtrl">
-    <label>Audio goes here:</label>
-    {{data.source}}
-    <audio controls id="problemaudio">
-      <source src="{{data.src}}" type="audio/mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <form id="inform">
-      <label>Type your translation here:</label>
-      <input type="text" ng-model="form.input"/>
-      <input type="submit" ng-click="submit()"/>
-    </form>
+
+        <div class="title1">
+          <img src="../static/img/clipboard.svg" id="clipboard"/>
+          <h5 style="padding-left:10px;display:inline-block;color:#27ae60;">Complete your daily tasks</h5>
+        </div>
+
+    <img src="../static/icons/students.png" class="emp"/>
+    <p id="emptext">Students</p>
+      <div class = "card">
+          <label>Listen to the audio, and translate it into English:</label>
+          {{data.source}}
+          <audio controls id="problemaudio">
+            <source src="{{data.src}}" type="audio/mp3">
+            Your browser does not support the audio element.
+          </audio>
+      </div>
+      <div class="card">
+        <form id="inform">
+          <label>Enter your answer here:</label>
+          <input type="text" class="form-control input-lg" style="width:330px"placeholder="Texts" ng-model="form.input"/>
+          <input class="btn btn-sm btn-block" style="position:relative;top:20px;width:100px; color:#ffffff" type="submit" ng-click="submit()"/>
+        </form>
+      </div>
+      <div class="pagination navbar">
+        <ul>
+          <li class="previous">
+            <a href="#" class="fui-arrow-check"></a>
+          </li>
+
+          <li class="active"><a href="#fakelink">1</a></li>
+          <li ><a href="#fakelink">2</a></li>
+          <li ><a href="#fakelink">3</a></li>
+          <li ><a href="#fakelink">4</a></li>
+          <li ><a href="#fakelink">5</a></li>
+          <li ><a href="#fakelink">6</a></li>
+          <li ><a href="#fakelink">7</a></li>
+          <li ><a href="#fakelink">8</a></li>
+          <li ><a href="#fakelink">9</a></li>
+          <li ><a href="#fakelink">10</a></li>
+
+          <li class="next">
+            <a href="#" class="fui-arrow-check"></a>
+          </li>
+        </ul>
+      </div>
   </body>
 </html>
 <!--
