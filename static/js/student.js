@@ -26,7 +26,6 @@ stuApp.controller('stuCtrl', function($scope, $http, stuFactory){
         ID : -1
     };
     stuFactory.getProblem().then(function(data){
-        console.log(data);
         $scope.data.id = data.data.id;
         $scope.data.src = "../static/audio/" + data.data.id + ".mp3";
         document.getElementById("problemaudio").src=$scope.data.src;
@@ -34,11 +33,13 @@ stuApp.controller('stuCtrl', function($scope, $http, stuFactory){
     $scope.submit = function() {
         if (validate($scope.form)) {
             // http request here
-            console.log($scope.form);
+            alert("Submission successful!");
+            $scope.form.input = "";
+            /*
             $http.post('/api/answer', $scope.form)
             .success(function(data){
-                console.log("POSTING" + data);
-            });
+
+            });*/
         }
     };
 });
