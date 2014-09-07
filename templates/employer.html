@@ -69,6 +69,9 @@
        width : 0%;
        border-radius : 10px;
      }
+     .answers {
+       padding-left : 20px;
+     }
     </style>
   </head>
   <body ng-controller="empCtrl">
@@ -90,10 +93,10 @@
             </audio>
           </td>
           <td class="content">
-            <div> <!-- TODO style -->
-              <p> 1. {{entry.content[0]}} </p>
-              <p> 2. {{entry.content[1]}} </p>
-              <p> 3. {{entry.content[2]}} </p>
+            <div>
+              <p class="answers"> 1. {{entry.content[0]}} </p>
+              <p class="answers"> 2. {{entry.content[1]}} </p>
+              <p class="answers"> 3. {{entry.content[2]}} </p>
             </div>
           </td>
         </tr>
